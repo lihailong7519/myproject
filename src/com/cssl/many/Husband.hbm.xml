@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- ORM -->
+<hibernate-mapping package="com.cssl.many">
+	<class name="Husband" batch-size="5" lazy="true" dynamic-update="true">
+        <cache usage="read-only"/>
+        <id name="hid" column="hid">
+        	<generator class="native"/>        	    	
+        </id>
+        <property name="hname" />
+      	<set name="wifes" lazy="extra" inverse="true">
+	        <cache usage="read-only"/>
+	        <key column="w_hid" not-null="true"/>
+	        <one-to-many class="Wife"/>
+	    </set>
+      	
+    </class>	
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- ORM -->
+<hibernate-mapping package="com.cssl.many">
+	<class name="Wife" dynamic-update="true">
+       	<cache usage="read-only"/>
+        <id name="wid" column="wid">
+        	<generator class="native"/>        	    	
+        </id>
+        <property name="wname" /> 
+        <many-to-one name="husband" lazy="proxy" fetch="join" column="w_hid"/>  
+    </class>	
+    
+    <query name="hql">
+        <![CDATA[
+    	from Wife w where w.wid < 6
+    	]]>
+    </query>
+    
+    <sql-query name="sql">
+    	<return class="Wife"/>
+    	select * from wife where wid &lt; 6
+    </sql-query>
+    
+</hibernate-mapping>
